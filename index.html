@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>비즈플래닛 · 챗봇관리 데모</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#F5F6FA;color:#1A1A2E;padding:40px 24px 64px}
+.wrap{max-width:1040px;margin:0 auto}.head{margin-bottom:28px}.eyebrow{font-size:12px;font-weight:800;color:#3B5BDB;letter-spacing:.06em;margin-bottom:8px}
+h1{font-size:24px;font-weight:900;margin-bottom:10px}.desc{font-size:13px;color:#4A5568;line-height:1.7}.desc code{background:#EEF2FF;color:#2B4FD8;padding:1px 6px;border-radius:5px;font-size:12px}
+.start{display:inline-flex;align-items:center;gap:8px;margin-top:18px;height:42px;padding:0 20px;background:#2B4FD8;color:#fff;border-radius:999px;font-weight:850;font-size:14px;text-decoration:none;box-shadow:0 8px 20px rgba(43,79,216,.25)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}.card{display:block;background:#fff;border:1px solid #E8EAF2;border-radius:8px;padding:16px 14px;text-decoration:none;color:inherit;transition:box-shadow .15s,border-color .15s,transform .1s}
+.card:hover{border-color:#748FFC;box-shadow:0 6px 18px rgba(59,91,219,.12);transform:translateY(-1px)}.num{width:26px;height:26px;border-radius:7px;background:#EEF2FF;color:#2B4FD8;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.card-title{font-size:13px;font-weight:800;line-height:1.4;margin-bottom:4px}.card-file{font-size:10px;color:#9AA0B4;word-break:break-all}.note{margin-top:18px;font-size:11px;color:#9AA0B4;line-height:1.6}
+@media(max-width:880px){.grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="eyebrow">BIZPLANET · CHATBOT MANAGEMENT DEMO</div>
+    <h1>챗봇관리 화면 데모</h1>
+    <p class="desc">네이버 플레이스 데이터로 RAG 문서를 생성하고, RB Dialog 지식 관리에 등록한 뒤 실제 챗봇 동작을 확인하는 8단계 흐름입니다.<br />각 화면 우상단 <strong>데모 바</strong>의 하이라이트를 따라 클릭하면 다음 화면으로 진행됩니다.</p>
+    <a class="start" href="soho_store_register.html">시나리오 시작</a>
+  </div>
+  <div class="grid">
+    <a class="card" href="soho_store_register.html"><div class="num">1</div><div class="card-title">매장 등록 URL 입력</div><div class="card-file">soho_store_register.html</div></a>
+    <a class="card" href="soho_store_register_loaded.html"><div class="num">2</div><div class="card-title">해화로in수산 정보 불러옴</div><div class="card-file">soho_store_register_loaded.html</div></a>
+    <a class="card" href="soho_store_register_rag_generated.html"><div class="num">3</div><div class="card-title">RAG 문서 생성 완료</div><div class="card-file">soho_store_register_rag_generated.html</div></a>
+    <a class="card" href="soho_store_register_download_modal.html"><div class="num">4</div><div class="card-title">다운로드 완료 팝업</div><div class="card-file">soho_store_register_download_modal.html</div></a>
+    <a class="card" href="RB-Dialog-soho1.html"><div class="num">5</div><div class="card-title">챗봇 지식 관리 목록</div><div class="card-file">RB-Dialog-soho1.html</div></a>
+    <a class="card" href="RB-Dialog-soho2.html"><div class="num">6</div><div class="card-title">info 문서 임베딩 설정</div><div class="card-file">RB-Dialog-soho2.html</div></a>
+    <a class="card" href="RB-Dialog-soho3.html"><div class="num">7</div><div class="card-title">review 문서 임베딩 설정</div><div class="card-file">RB-Dialog-soho3.html</div></a>
+    <a class="card" href="chatbot_live.html"><div class="num">8</div><div class="card-title">실 챗봇 확인</div><div class="card-file">chatbot_live.html</div></a>
+  </div>
+  <p class="note">원본 소스는 수정하지 않고, 이 폴더의 정적 데모 파일만 생성합니다.</p>
+</div>
+</body>
+</html>

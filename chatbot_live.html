@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>실 챗봇 확인 · 챗봇관리 데모</title>
+<link rel="stylesheet" href="demo.css" />
+
+</head>
+<body>
+<style>
+  body{margin:0;background:#F5F7FB;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;color:#111827}
+  .chat-shell{height:100vh;display:grid;grid-template-rows:54px 1fr}
+  .chat-head{display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#111827;color:#fff}
+  .chat-title{font-weight:850;font-size:14px}
+  .chat-title span{color:#9CA3AF;font-weight:600;margin-left:8px}
+  .chat-open{height:32px;border-radius:6px;background:#2B4FD8;color:#fff;text-decoration:none;display:inline-flex;align-items:center;padding:0 12px;font-size:12px;font-weight:800}
+  iframe{width:100%;height:100%;border:0;background:#fff}
+</style>
+<div class="chat-shell">
+  <header class="chat-head">
+    <div class="chat-title">해화로in수산 실 챗봇 <span>RB Dialog</span></div>
+    <a class="chat-open" href="https://chat.rbdialog.co.kr/?botId=8558886c0e8c4b0b849efafe82cc574d" target="_blank" rel="noopener noreferrer">새 창으로 열기</a>
+  </header>
+  <iframe src="https://chat.rbdialog.co.kr/?botId=8558886c0e8c4b0b849efafe82cc574d" title="해화로in수산 챗봇"></iframe>
+</div>
+<script defer src="demo.js"></script>
+</body>
+</html>
