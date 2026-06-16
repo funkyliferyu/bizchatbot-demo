@@ -43,21 +43,41 @@
   .badge.green{background:#E8F8EF;color:#178447}
   .badge.blue{background:#EEF2FF;color:#2B4FD8}
   .badge.gray{background:#F1F3F5;color:#667085}
-  .detail-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px}
+  .detail-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;align-items:start}
   .doc-card{background:#fff;border:1px solid #E2E8F0;border-radius:8px;padding:18px}
   .doc-title{font-size:20px;font-weight:900;margin-bottom:8px}
   .doc-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
   .form-row{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:13px 0;border-top:1px solid #EDF2F7}
   .form-label{font-size:12px;font-weight:850;color:#4B5563}
   .form-value{font-size:13px;color:#111827;line-height:1.55}
+  .doc-inspector{position:sticky;top:74px}
+  .section-label{font-size:11px;font-weight:900;color:#667085;letter-spacing:.08em;text-transform:uppercase;margin:18px 0 8px}
+  .doc-preview{border:1px solid #D8E0EC;border-radius:8px;background:#fff;overflow:hidden}
+  .doc-preview-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;background:#FAFBFC;border-bottom:1px solid #E2E8F0}
+  .doc-preview-title{font-size:13px;font-weight:900;color:#111827}
+  .doc-preview-note{font-size:11px;color:#7B8496}
+  .doc-section{padding:14px 16px;border-bottom:1px solid #EDF2F7}
+  .doc-section:last-child{border-bottom:0}
+  .doc-section h3{font-size:14px;margin:0 0 8px;color:#111827}
+  .doc-section p,.doc-section li{font-size:13px;line-height:1.7;color:#374151}
+  .doc-section ul{margin:0;padding-left:18px}
+  .review-entry{display:grid;grid-template-columns:72px 1fr;gap:10px;padding:14px 16px;border-bottom:1px solid #EDF2F7}
+  .review-entry:last-child{border-bottom:0}
+  .review-meta{font-size:11px;color:#7B8496;line-height:1.5}
+  .review-body{font-size:13px;line-height:1.7;color:#374151}
+  .reply{margin-top:8px;padding:9px 10px;border-left:3px solid #2B4FD8;background:#F5F7FF;border-radius:0 6px 6px 0;color:#344054}
   .vector-box{border:1px solid #D8E0EC;border-radius:8px;padding:14px;background:#FAFBFC}
   .vector-title{font-size:13px;font-weight:900;margin-bottom:10px}
   .progress{height:8px;background:#E8EEF7;border-radius:999px;overflow:hidden}
   .progress span{display:block;height:100%;width:100%;background:#2B4FD8}
   .chunk-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
-  .chunk{padding:10px;border:1px solid #E2E8F0;border-radius:6px;background:#fff;font-size:12px;line-height:1.45;color:#4B5563}
+  .chunk{padding:11px 12px;border:1px solid #E2E8F0;border-radius:6px;background:#fff;font-size:12px;line-height:1.55;color:#4B5563}
+  .chunk strong{display:block;color:#111827;font-size:12px;margin-bottom:4px}
+  .chunk small{display:block;color:#7B8496;font-size:10px;margin-top:6px}
+  .chunk.active{border-color:#2B4FD8;box-shadow:0 0 0 3px rgba(43,79,216,.08)}
+  .scroll-hint{margin-top:10px;font-size:11px;color:#7B8496;line-height:1.5}
   .demo-rb-action{margin-top:14px;width:100%}
-  @media(max-width:900px){.rb-shell{grid-template-columns:1fr}.rb-side{display:none}.rb-grid{grid-template-columns:repeat(2,1fr)}.detail-layout{grid-template-columns:1fr}}
+  @media(max-width:900px){.rb-shell{grid-template-columns:1fr}.rb-side{display:none}.rb-grid{grid-template-columns:repeat(2,1fr)}.detail-layout{grid-template-columns:1fr}.doc-inspector{position:static}.review-entry{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -82,15 +102,44 @@
         <div class="form-row"><div class="form-label">검색 범위</div><div class="form-value">해화로in수산 챗봇 전용 지식베이스</div></div>
         <div class="form-row"><div class="form-label">청크 설정</div><div class="form-value">chunk size 800 · overlap 120 · Korean sentence boundary</div></div>
         <div class="form-row"><div class="form-label">답변 우선순위</div><div class="form-value">영업시간, 위치, 예약, 메뉴 질문에 최우선 사용</div></div>
+
+        <div class="section-label">Document Preview</div>
+        <div class="doc-preview">
+          <div class="doc-preview-head"><div class="doc-preview-title">info_해화로in수산.docx</div><div class="doc-preview-note">원문 일부 표시</div></div>
+          <div class="doc-section">
+            <h3>기본 정보</h3>
+            <ul>
+              <li>상호명: 해화로in수산</li>
+              <li>업종: 음식점 &gt; 일식 &gt; 생선회</li>
+              <li>주소: 서울 광진구 광나루로 383 1,2층</li>
+              <li>전화: 0507-1359-5863</li>
+            </ul>
+          </div>
+          <div class="doc-section">
+            <h3>매장 소개</h3>
+            <p>해화로는 신선한 재료를 엄선해 자연 그대로의 깊은 맛을 전하며, 싱싱한 회부터 정갈한 식사와 계절 해산물 요리까지 정성껏 준비하는 매장입니다. AI 요약 기준 핵심 문구는 “신선한 대방어의 겨울철 진미”입니다.</p>
+          </div>
+          <div class="doc-section">
+            <h3>영업시간 및 이용 정보</h3>
+            <p>월-목 11:20-23:30, 금-토 11:20-24:00, 일 11:20-23:30 기준으로 안내합니다. 평일 브레이크타임은 14:30-16:30이며 단체 이용, 예약, 무선 인터넷, 남/녀 화장실 구분, 유아의자, 대기공간, 포장, 배달 정보를 포함합니다.</p>
+          </div>
+          <div class="doc-section">
+            <h3>대표 메뉴</h3>
+            <p>모듬 회ㆍ산물, 속초식 항아리 물회, 초신선 활어 3종 스페셜, 화덕 모듬 생선구이 쌈밥, 프리미엄 고등어 화덕구이 정찬 등이 챗봇 추천 응답의 기준 메뉴로 등록됩니다.</p>
+          </div>
+        </div>
       </section>
-      <aside class="doc-card">
+      <aside class="doc-card doc-inspector">
         <div class="vector-box">
-          <div class="vector-title">임베딩 진행률</div>
+          <div class="vector-title">청크 검사</div>
           <div class="progress"><span></span></div>
+          <div class="scroll-hint">문서 원문과 연결되는 검색 단위입니다. 실제 데이터 전체 대신 데모 확인에 필요한 대표 청크만 표시합니다.</div>
           <div class="chunk-list">
-            <div class="chunk">기본 정보 · 서울 광진구 광나루로 383 1,2층</div>
-            <div class="chunk">영업시간 · 월-목 11:20-23:30, 금-토 24:00까지</div>
-            <div class="chunk">메뉴 · 모듬 회ㆍ산물, 속초식 항아리 물회, 초신선 활어 3종</div>
+
+            <div class="chunk active"><strong>Chunk 001 · 기본 정보</strong>상호명, 업종, 주소, 전화번호를 하나의 검색 단위로 묶어 위치/전화/매장명 질문에 바로 매칭합니다.<small>tokens 128 · source: 기본 정보</small></div>
+            <div class="chunk"><strong>Chunk 006 · 영업시간</strong>요일별 영업시간과 브레이크타임을 분리해 “오늘 몇 시까지?”, “점심 가능?” 질문에 사용합니다.<small>tokens 176 · source: 영업시간</small></div>
+            <div class="chunk"><strong>Chunk 014 · 메뉴 추천</strong>모듬 회ㆍ산물, 항아리 물회, 활어 3종, 생선구이 쌈밥을 메뉴 추천 후보로 보관합니다.<small>tokens 214 · source: 메뉴판</small></div>
+            <div class="chunk"><strong>Chunk 021 · 편의시설</strong>예약, 단체 이용, 유아의자, 포장, 배달, 콜키지 가능 여부를 이용조건 답변에 연결합니다.<small>tokens 165 · source: 편의시설</small></div>
           </div>
         </div>
         <button type="button" class="rb-btn demo-rb-action">review 파일 보기</button>
