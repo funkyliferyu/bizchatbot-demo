@@ -60,8 +60,10 @@
     {
       page: 'RB-Dialog-soho3.html',
       label: 'review 임베딩 설정',
-      target: { selector: '.demo-rb-action', text: '챗봇 구현 확인하기' },
-      guide: '방문자 리뷰 문서도 임베딩되었습니다. [챗봇 구현 확인하기]를 눌러 실제 챗봇 화면으로 이동합니다.',
+      target: null,
+      guide: '방문자 리뷰 문서가 RAG 검색용 벡터로 임베딩되었습니다. 리뷰 청크를 확인한 뒤 실제 챗봇 화면으로 이동합니다.',
+      guideCta: '챗봇 구현 확인하기',
+      guidePosition: 'top-right',
       next: 'chatbot_live.html'
     },
     {

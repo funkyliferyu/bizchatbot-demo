@@ -150,7 +150,6 @@ function rbStyles(): string {
   .chunk small{display:block;color:#7B8496;font-size:10px;margin-top:6px}
   .chunk.active{border-color:#2B4FD8;box-shadow:0 0 0 3px rgba(43,79,216,.08)}
   .scroll-hint{margin-top:10px;font-size:11px;color:#7B8496;line-height:1.5}
-  .demo-rb-action{margin-top:14px;width:100%}
   @media(max-width:900px){.rb-shell{grid-template-columns:1fr}.rb-side{display:none}.rb-grid{grid-template-columns:repeat(2,1fr)}.detail-layout{grid-template-columns:1fr}.doc-inspector{position:static}.review-entry{grid-template-columns:1fr}}
 </style>`;
 }
@@ -303,119 +302,145 @@ function rbKnowledgeInfoPage(): string {
   );
 }
 
-function rbDetailPage(kind: 'info' | 'reviews'): string {
-  if (kind === 'info') return rbKnowledgeInfoPage();
+function rbKnowledgeReviewPage(): string {
+  const chunks = [
+    '[리뷰 1.0.0] 직원분들이 정말 친절하고 회도 신선해요. 해화로in수산 방문 후기: 회식으로 방문했는데 자리 안내가 빠르고, 모듬 회ㆍ산물 구성이 푸짐해서 여러 명이 나눠 먹기 좋았습니다. 물회, 생선구이, 쌈밥까지 메뉴 폭이 넓어 취향이 다른 일행도 만족했습니다.',
+    '[리뷰 1.0.10] 회가 두툼하고 숙성회 식감이 좋았어요. 어린이대공원역 근처에서 횟집 찾는 분들에게 추천합니다. 광진광장공영주차장 쪽에서 걸어오면 금방이고, 직원분이 오늘 좋은 생선과 추천 메뉴를 설명해줘서 처음 방문해도 고르기 쉬웠습니다. 초신선 大활어 3종 스페셜과 속초식 항아리 물회 조합이 좋았습니다.',
+    '[리뷰 2.0.0] 모듬 회ㆍ산물은 해산물 종류가 다양해서 좋았고, 신선도가 확실히 느껴졌습니다. 콜키지도 가능해서 와인 모임으로 방문하기 괜찮았어요. 예약하고 가니 자리 안내가 빨랐고, 단체 모임이나 가족 식사에도 어울리는 분위기였습니다. 다음에는 7종 골라먹는 大숙성회도 먹어보고 싶습니다.',
+    '오랜만에 부모님 모시고 갔는데 생선구이 쌈밥이 든든하고 반찬도 깔끔했습니다. 화덕 고등어구이 쌈밥은 1인 1마리라 양이 충분했고, 우렁쌈장과 같이 먹으니 점심 메뉴로 만족스러웠습니다. 아이 의자와 대기공간이 있어 가족 단위 방문에도 편했습니다.',
+    '늘 회가 신선하고 물회 국물이 시원합니다. 속초식 항아리 물회는 새콤달콤한 육수가 좋고 양도 넉넉해서 여름 점심 메뉴로 추천할 만합니다. 포장도 깔끔하게 되어 집에서 먹기 편했고, 회 신선도가 잘 유지됐습니다. 사장님 답글도 친절해서 재방문 의사가 생겼습니다.',
+    '[리뷰 5.0.26] 평일 저녁에 방문했는데 손님이 많아 예약하고 가길 잘했다고 생각했습니다. 네이버 예약으로 잡고 방문하면 대기 부담이 적습니다. 후식 화덕밥 서비스와 예약 특전 안내도 좋았고, 룸 이용은 사전 문의가 필요하다고 안내받았습니다.',
+    '저녁 시간에는 손님이 많아서 예약 추천합니다. 회 메뉴 외에도 알곤이찜, 매운탕, 칼국수탕처럼 술자리 마무리 메뉴가 있어 회식 코스로 좋았습니다. 매운탕이 얼큰하고 마지막 식사로 잘 어울렸습니다. 직원분들이 접시 정리와 메뉴 설명을 빠르게 도와줘 편했습니다.',
+    '[리뷰 6.0.6] 프리미엄 잿방어 숙성회와 대방어 시즌 메뉴가 인상적이었습니다. 겨울철에는 방어가 고소하고 기름져서 만족도가 높았고, 기본 반찬이 깔끔해서 회 맛을 해치지 않았습니다. 숙성 고등어회와 도다리 세로회처럼 계절 메뉴가 있어 다시 방문하고 싶습니다.',
+    '[리뷰 8.0.40] 가족 모임으로 방문했습니다. 좌석 간격이 괜찮고 너무 시끄럽지 않아 대화하기 좋았습니다. 아이와 함께 갔는데 유아의자가 있어 편했고, 회를 못 먹는 사람도 생선구이 정식이나 쌈밥을 선택할 수 있어 모두 만족했습니다.',
+    '[리뷰 11.0.30] 처음 방문한 사람에게는 모듬 회ㆍ산물이나 속초식 항아리 물회를 추천하고 싶습니다. 사진으로 본 메뉴와 실제 구성이 비슷했고, 해산물 모듬은 여러 가지를 한 번에 먹을 수 있어서 첫 방문 메뉴로 좋았습니다. 인스타그램에서 본 분위기와 실제 매장 느낌도 비슷했습니다.',
+    '[리뷰 12.0.30] 회 초보자도 부담 없이 고를 수 있게 메뉴 설명이 자세했습니다. 물회처럼 시원한 메뉴와 화덕 생선구이 메뉴를 함께 추천받으니 취향이 다른 사람들과 방문해도 고르기 쉬웠습니다. 네이버 예약, 주차, 대표 메뉴 정보를 한 번에 안내받을 수 있으면 편할 것 같습니다.',
+    '해산물 모듬 구성이 푸짐하고 신선했습니다. 회, 물회, 생선구이까지 메뉴 폭이 넓어서 상황별 추천이 자연스럽습니다. 손님이 "처음 가면 뭐 먹을까요?"라고 물으면 모듬 회ㆍ산물, 속초식 항아리 물회, 초신선 大활어 3종 스페셜을 추천하면 좋을 것 같습니다.',
+    '[리뷰 15.0.12] 매장 위치가 어린이대공원역에서 가까워 약속 장소로 잡기 좋았습니다. 지하철로 방문하기 편했고, 주차는 광진광장공영주차장이나 어린이대공원 정문 주차장 안내를 받았습니다. 대중교통과 주차 정보를 미리 알고 가면 훨씬 편합니다.',
+    '[리뷰 17.3.7] 포장해서 먹었는데 포장 상태가 깔끔했습니다. 매장에서 먹을 때와 다르게 집에서 먹어도 회 신선도가 유지됐고, 구성 설명을 잘 해주셔서 가족들과 나눠 먹기 편했습니다. 포장 할인 이벤트가 진행 중이면 방문 포장으로 이용해도 좋겠습니다.',
+    '[리뷰 18.1.1] 쭈꾸미 우렁 쌈밥과 화덕 고등어구이 정식이 든든했습니다. 점심에 빠르게 먹기 좋은 메뉴가 많고, 직장인 점심이나 가족 식사 모두 어울립니다. 반찬 구성도 깔끔했고, 미역국과 우렁쌈장이 잘 어울렸습니다.',
+    '[리뷰 21.5.8] 회식 장소로 방문했는데 단체 이용 가능해서 편했습니다. 직원분이 와인잔과 접시를 빠르게 정리해주고, 콜키지 안내도 명확했습니다. 회와 해산물 메뉴가 와인과 잘 맞아 소규모 모임에도 추천합니다.',
+    '[리뷰 24.3.0] 프리미엄 고등어 화덕구이 정찬은 밥 메뉴로 만족도가 높았습니다. 최상품 고등어와 정통 수제 반찬 구성이 좋아서 회를 먹지 않는 사람에게도 추천할 수 있습니다. 점심 메뉴로는 물회, 쌈밥, 회덮밥이 괜찮았습니다.',
+    '[리뷰 26.3.9] 직원분이 오늘 좋은 생선과 추천 메뉴를 알려주셔서 좋았습니다. 챗봇에서도 "오늘 추천 메뉴", "처음 방문 추천", "가족 식사 추천" 질문에 비슷한 톤으로 답하면 유용할 것 같습니다. 재방문 의사가 있습니다.',
+    '[리뷰 30.0.0] 매장 전용 주차는 어렵지만 주변 주차장 안내가 자세해서 불편하지 않았습니다. 어린이대공원역 5번 출구와 가까워 대중교통 이용이 편합니다. 광진광장공영주차장, 어린이대공원 정문 주차장, AJ파크 어린이회관점, KCC파크타운 정보를 미리 알려주면 좋습니다.',
+    '[리뷰 31.1.0] 아이와 함께 방문했는데 유아의자가 있고 직원분들이 자리를 편하게 잡아줘서 좋았습니다. 회를 못 먹는 가족은 화덕 고등어구이 쌈밥을 먹었고, 회를 좋아하는 가족은 모듬 회ㆍ산물을 주문했습니다. 가족 식사 추천 질문에 적합한 리뷰입니다.',
+    '[리뷰 32.2.0] 속초식 항아리 물회가 시원해서 더운 날 방문하기 좋았습니다. 육수가 새콤하고 회가 넉넉해 둘이 나눠 먹기에도 괜찮았습니다. 점심 메뉴 추천이나 여름철 인기 메뉴 질문에 물회와 회덮밥을 함께 안내하면 자연스럽습니다.',
+    '[리뷰 33.0.0] 네이버 예약 후 방문했더니 자리 안내가 빨랐습니다. 저녁에는 손님이 많아 대기할 수 있으니 예약을 권장한다는 안내가 실제 이용 경험과 잘 맞습니다. 챗봇은 피크 시간, 예약 가능 여부, 단체 이용 가능 여부를 함께 답변하는 것이 좋겠습니다.',
+    '[리뷰 34.4.0] 대방어 시즌 메뉴가 고소하고 식감이 좋았습니다. 프리미엄 잿방어 숙성회와 숙성 고등어회처럼 계절 메뉴가 있어 계절별 추천 답변을 구성하기 좋습니다. 겨울 메뉴를 묻는 고객에게 대방어와 숙성회 정보를 우선 노출할 수 있습니다.',
+    '[리뷰 35.1.4] 점심으로 직화 쭈꾸미 쌈밥을 먹었는데 반찬 구성이 깔끔하고 양이 충분했습니다. 회 전문점이지만 식사 메뉴도 든든하다는 리뷰가 반복됩니다. 회를 선호하지 않는 고객에게 생선구이 정식, 쌈밥, 회덮밥을 추천할 수 있습니다.',
+    '[리뷰 36.0.8] 포장 주문했는데 회 포장이 흐트러지지 않고 설명도 친절했습니다. 매장에서 먹기 어려운 고객에게 포장 가능 여부, 포장 할인 이벤트, 추천 포장 메뉴를 안내하면 좋겠습니다. 신선도에 대한 긍정 리뷰가 함께 연결됩니다.',
+    '[리뷰 37.2.3] 회식으로 방문했는데 콜키지와 단체 이용 안내가 명확했습니다. 와인을 가져가도 편했고 접시와 잔을 빠르게 챙겨줬습니다. 모임 장소 추천, 회식 장소 추천, 와인과 어울리는 해산물 메뉴 질문에 활용하기 좋은 청크입니다.',
+    '[리뷰 38.0.1] 어린이대공원역에서 가까워 약속 장소로 좋았습니다. 비가 오는 날에도 역에서 금방 걸어갈 수 있어 편했고, 주차는 공영주차장 안내를 참고했습니다. 위치 질문에는 지하철 동선과 주변 주차장을 함께 안내하는 것이 정확합니다.',
+    '[리뷰 39.5.0] 모듬 회ㆍ산물 구성이 다양하고 해산물 신선도가 좋았습니다. 처음 방문하는 사람에게 메뉴 선택이 어려울 수 있는데 직원분이 추천을 잘 해줘 편했습니다. 챗봇은 첫 방문 추천 메뉴로 모듬 회ㆍ산물과 물회를 함께 안내하면 좋겠습니다.',
+    '[리뷰 40.1.7] 매운탕이 얼큰해서 회를 먹고 난 뒤 마무리 메뉴로 만족했습니다. 알곤이탕, 칼국수탕, 매운탕처럼 술자리 마무리 메뉴가 있어 저녁 모임에 어울립니다. 식사 마무리 메뉴 추천 질문에 사용할 수 있습니다.',
+    '[리뷰 41.0.0] 사장님 답글이 정성스럽고 재방문 고객에게 감사 인사를 남겨주는 점이 좋았습니다. 리뷰 답글 톤은 친절하고 차분하며, 고객 경험을 챗봇 답변에 녹일 때도 과장 없이 추천하는 방식이 적합합니다.',
+    '[리뷰 42.3.0] 메뉴판 사진과 실제 메뉴 구성이 비슷했고, 해산물 모듬은 여러 가지를 한 번에 먹을 수 있어 만족했습니다. 인스타그램을 보고 방문한 고객 리뷰가 있어 사진 기반 기대와 실제 메뉴 만족도를 함께 설명할 수 있습니다.',
+    '[리뷰 43.1.5] 저녁 피크 시간에는 매장이 바빴지만 직원 응대가 빠르고 음식 나오는 속도도 괜찮았습니다. 혼잡 가능성은 주의 정보로 안내하고, 예약 후 방문하면 편하다는 팁을 함께 제공하는 답변 구성이 적절합니다.',
+    '[리뷰 44.0.2] 아이 의자, 대기공간, 남녀 화장실 구분처럼 편의시설이 잘 갖춰져 있어 가족 단위 방문에 편했습니다. 챗봇에서 가족 식사 가능 여부나 아이 동반 문의가 들어오면 편의시설과 식사 메뉴를 함께 답하면 좋습니다.',
+    '[리뷰 45.2.8] 숙성회와 활어 메뉴 모두 신선했고, 초신선 大활어 3종 스페셜은 여러 어종을 맛볼 수 있어 만족했습니다. 회 품질 질문에는 신선도, 두툼한 식감, 다양한 구성 키워드를 근거로 답변할 수 있습니다.',
+    '[리뷰 46.0.0] 전체적으로 재방문 의사가 높고, 긍정 키워드는 신선도와 친절한 응대에 집중됩니다. 다만 주차는 사전 확인이 필요하고 저녁에는 예약을 권장한다는 리뷰가 반복됩니다. 추천 답변에는 장점과 이용 팁을 함께 넣는 것이 좋겠습니다.',
+    '방문자 리뷰 전반에서 반복되는 긍정 키워드는 신선도, 친절한 응대, 메뉴 다양성, 물회, 생선구이 쌈밥, 예약 편의성입니다. 부정/주의 키워드는 저녁 피크 시간대 혼잡, 주차 사전 확인, 예약 권장입니다. 챗봇 답변에서는 방문 목적별 추천과 예약/주차 안내를 함께 제공하는 것이 적합합니다.'
+  ];
 
-  const isInfo = kind === 'info';
-  const infoPreview = `
-        <div class="section-label">Document Preview</div>
-        <div class="doc-preview">
-          <div class="doc-preview-head"><div class="doc-preview-title">info_해화로in수산.docx</div><div class="doc-preview-note">원문 일부 표시</div></div>
-          <div class="doc-section">
-            <h3>기본 정보</h3>
-            <ul>
-              <li>상호명: 해화로in수산</li>
-              <li>업종: 음식점 &gt; 일식 &gt; 생선회</li>
-              <li>주소: 서울 광진구 광나루로 383 1,2층</li>
-              <li>전화: 0507-1359-5863</li>
-            </ul>
-          </div>
-          <div class="doc-section">
-            <h3>매장 소개</h3>
-            <p>해화로는 신선한 재료를 엄선해 자연 그대로의 깊은 맛을 전하며, 싱싱한 회부터 정갈한 식사와 계절 해산물 요리까지 정성껏 준비하는 매장입니다. AI 요약 기준 핵심 문구는 “신선한 대방어의 겨울철 진미”입니다.</p>
-          </div>
-          <div class="doc-section">
-            <h3>영업시간 및 이용 정보</h3>
-            <p>월-목 11:20-23:30, 금-토 11:20-24:00, 일 11:20-23:30 기준으로 안내합니다. 평일 브레이크타임은 14:30-16:30이며 단체 이용, 예약, 무선 인터넷, 남/녀 화장실 구분, 유아의자, 대기공간, 포장, 배달 정보를 포함합니다.</p>
-          </div>
-          <div class="doc-section">
-            <h3>대표 메뉴</h3>
-            <p>모듬 회ㆍ산물, 속초식 항아리 물회, 초신선 활어 3종 스페셜, 화덕 모듬 생선구이 쌈밥, 프리미엄 고등어 화덕구이 정찬 등이 챗봇 추천 응답의 기준 메뉴로 등록됩니다.</p>
-          </div>
-        </div>`;
-  const reviewPreview = `
-        <div class="section-label">Document Preview</div>
-        <div class="doc-preview">
-          <div class="doc-preview-head"><div class="doc-preview-title">reviews_해화로in수산.docx</div><div class="doc-preview-note">리뷰 원문 샘플 · 약 3회 스크롤 분량</div></div>
-          <div class="review-entry"><div class="review-meta">#001<br>2026.06<br>방문자</div><div class="review-body">회가 정말 신선하고 구성도 알차요. 모듬 회ㆍ산물 주문했는데 해산물 종류가 다양해서 여러 명이 나눠 먹기 좋았습니다.<div class="reply">사장님 답글: 신선한 재료로 보답드리겠습니다. 방문해주셔서 감사합니다.</div></div></div>
-          <div class="review-entry"><div class="review-meta">#014<br>2026.05<br>방문자</div><div class="review-body">어린이대공원역 근처에서 회 먹고 싶을 때 추천할 만합니다. 직원분들이 설명을 잘 해주고, 물회가 시원해서 점심 식사로도 괜찮았어요.</div></div>
-          <div class="review-entry"><div class="review-meta">#027<br>2026.05<br>방문자</div><div class="review-body">숙성회 식감이 좋고 밑반찬도 깔끔했습니다. 예약하고 가니 자리 안내가 빨랐고, 단체 모임으로 다시 방문하고 싶어요.<div class="reply">사장님 답글: 모임 자리도 편하게 이용하실 수 있도록 준비해두겠습니다.</div></div></div>
-          <div class="review-entry"><div class="review-meta">#039<br>2026.04<br>방문자</div><div class="review-body">생선구이 쌈밥이 생각보다 든든해서 점심 메뉴로 좋았습니다. 회 메뉴뿐 아니라 식사 메뉴가 다양해서 같이 간 사람들 취향 맞추기 쉬웠습니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#052<br>2026.04<br>방문자</div><div class="review-body">대방어 시즌에 방문했는데 기름지고 고소한 맛이 좋았습니다. 콜키지도 가능해서 와인 가져가서 먹기 좋았고, 직원 응대도 친절했습니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#066<br>2026.03<br>방문자</div><div class="review-body">주차는 주변 공영주차장 안내를 받았습니다. 매장 위치가 역에서 가까워서 대중교통으로 가기 편했고, 예약 링크로 미리 잡고 가는 게 좋아 보여요.</div></div>
-          <div class="review-entry"><div class="review-meta">#078<br>2026.03<br>방문자</div><div class="review-body">속초식 항아리 물회가 새콤하고 시원합니다. 양도 넉넉해서 둘이 먹기 좋았고, 회덮밥이나 생선구이 같은 식사 메뉴도 같이 주문하기 좋았습니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#091<br>2026.02<br>방문자</div><div class="review-body">아이 의자가 있고 좌석 간격도 괜찮았습니다. 가족 식사로 방문했는데 직원분이 메뉴 추천을 잘 해줘서 처음 방문해도 고르기 쉬웠습니다.<div class="reply">사장님 답글: 가족 식사 자리도 만족하실 수 있도록 더 세심히 챙기겠습니다.</div></div></div>
-          <div class="review-entry"><div class="review-meta">#100<br>2026.02<br>방문자</div><div class="review-body">해산물 모듬 구성이 푸짐하고 신선했습니다. 회, 물회, 생선구이까지 메뉴 폭이 넓어서 챗봇에서 상황별 추천 답변을 만들기에 좋은 리뷰 데이터입니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#112<br>2026.01<br>방문자</div><div class="review-body">처음 방문해서 직원분께 추천을 받았는데 모듬 회와 물회 조합이 좋았습니다. 회가 두툼하고 신선해서 부모님도 만족하셨어요. 네이버 예약으로 잡고 가면 대기 부담이 적을 것 같습니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#126<br>2026.01<br>방문자</div><div class="review-body">저녁 시간에는 손님이 많아서 예약을 추천합니다. 회 메뉴 외에도 생선구이, 쌈밥, 알곤이탕처럼 식사류가 있어서 술자리와 식사를 모두 커버할 수 있는 점이 좋았습니다.<div class="reply">사장님 답글: 방문 시간에 맞춰 더 편하게 안내드릴 수 있도록 준비하겠습니다.</div></div></div>
-          <div class="review-entry"><div class="review-meta">#139<br>2025.12<br>방문자</div><div class="review-body">대방어가 고소하고 신선했습니다. 겨울 메뉴를 찾는 사람에게 추천하기 좋고, 기본 반찬도 깔끔해서 회 맛을 해치지 않았습니다. 다음에는 숙성회 메뉴도 먹어보고 싶어요.</div></div>
-          <div class="review-entry"><div class="review-meta">#151<br>2025.12<br>방문자</div><div class="review-body">포장해서 먹었는데 포장 상태가 깔끔했습니다. 매장에서 먹을 때와 다르게 집에서 먹어도 회 신선도가 유지됐고, 구성 설명을 잘 해주셔서 가족들과 나눠 먹기 편했습니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#164<br>2025.11<br>방문자</div><div class="review-body">어린이대공원역에서 가까워 약속 장소로 잡기 좋았습니다. 회식으로 갔는데 메뉴가 다양해 회를 못 먹는 사람도 생선구이나 식사류를 선택할 수 있어 만족도가 높았습니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#177<br>2025.11<br>방문자</div><div class="review-body">물회 국물이 시원하고 회 양도 괜찮았습니다. 점심에 빠르게 먹기 좋은 메뉴가 많아서 근처 직장인이나 가족 단위 손님에게 모두 맞을 것 같아요.</div></div>
-          <div class="review-entry"><div class="review-meta">#189<br>2025.10<br>방문자</div><div class="review-body">좌석이 깔끔하고 대기공간이 있어서 모임 전에 기다리기 괜찮았습니다. 단체 이용 가능 여부와 예약 가능 여부를 챗봇에서 바로 알려주면 손님 입장에서는 편할 것 같습니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#201<br>2025.10<br>방문자</div><div class="review-body">매운탕이 얼큰하고 마무리로 좋았습니다. 회를 먹고 난 뒤 추가하기 좋은 메뉴를 물어보면 매운탕, 알곤이탕, 생선구이 같은 답변이 나오면 자연스러울 것 같아요.<div class="reply">사장님 답글: 마무리 메뉴까지 만족하셨다니 감사합니다. 더 따뜻한 식사로 준비하겠습니다.</div></div></div>
-          <div class="review-entry"><div class="review-meta">#218<br>2025.09<br>방문자</div><div class="review-body">인스타그램에서 보고 방문했습니다. 사진으로 본 메뉴와 실제 구성이 비슷했고, 해산물 모듬은 여러 가지를 한 번에 먹을 수 있어서 첫 방문 메뉴로 좋았습니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#233<br>2025.09<br>방문자</div><div class="review-body">콜키지가 가능해서 와인 모임으로 방문했습니다. 회와 해산물 메뉴가 와인과 잘 맞았고, 직원분이 접시와 자리 정리를 빠르게 도와줘서 편하게 이용했습니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#247<br>2025.08<br>방문자</div><div class="review-body">아이와 함께 갔는데 유아의자가 있어 편했습니다. 매장 분위기가 너무 시끄럽지 않고, 메뉴 설명이 자세해서 가족 식사 장소로 추천할 수 있을 것 같아요.</div></div>
-          <div class="review-entry"><div class="review-meta">#261<br>2025.08<br>방문자</div><div class="review-body">전체적으로 신선도, 응대, 메뉴 폭이 장점으로 느껴졌습니다. 주차는 주변 주차장 안내를 미리 확인하면 좋고, 예약 후 방문하면 더 편하게 이용할 수 있습니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#274<br>2025.07<br>방문자</div><div class="review-body">회 초보자도 부담 없이 고를 수 있게 메뉴 구성이 설명되어 있었습니다. 물회처럼 시원한 메뉴와 구이 메뉴를 함께 추천하면 다양한 취향을 가진 손님에게 맞을 것 같습니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#286<br>2025.07<br>방문자</div><div class="review-body">직원분이 오늘 좋은 생선과 추천 메뉴를 알려주셔서 좋았습니다. 챗봇에서도 “오늘 추천 메뉴”, “처음 방문 추천” 질문에 비슷한 톤으로 답하면 유용할 것 같아요.</div></div>
-          <div class="review-entry"><div class="review-meta">#298<br>2025.06<br>방문자</div><div class="review-body">포장과 배달도 가능하다고 안내받았습니다. 집에서 먹을 메뉴를 찾는 사람에게 회 포장, 물회, 생선구이 정찬을 상황에 맞춰 알려주면 좋겠습니다.</div></div>
-          <div class="review-entry"><div class="review-meta">#312<br>2025.06<br>방문자</div><div class="review-body">재방문 의사가 있습니다. 회 신선도와 식사 메뉴 선택지가 장점이고, 역 근처라 약속 잡기 편했습니다. 예약, 주차, 대표 메뉴 정보를 한 번에 안내받으면 편할 것 같습니다.</div></div>
-        </div>`;
-  const infoChunks = `
-            <div class="chunk active"><strong>Chunk 001 · 기본 정보</strong>상호명, 업종, 주소, 전화번호를 하나의 검색 단위로 묶어 위치/전화/매장명 질문에 바로 매칭합니다.<small>tokens 128 · source: 기본 정보</small></div>
-            <div class="chunk"><strong>Chunk 006 · 영업시간</strong>요일별 영업시간과 브레이크타임을 분리해 “오늘 몇 시까지?”, “점심 가능?” 질문에 사용합니다.<small>tokens 176 · source: 영업시간</small></div>
-            <div class="chunk"><strong>Chunk 014 · 메뉴 추천</strong>모듬 회ㆍ산물, 항아리 물회, 활어 3종, 생선구이 쌈밥을 메뉴 추천 후보로 보관합니다.<small>tokens 214 · source: 메뉴판</small></div>
-            <div class="chunk"><strong>Chunk 021 · 편의시설</strong>예약, 단체 이용, 유아의자, 포장, 배달, 콜키지 가능 여부를 이용조건 답변에 연결합니다.<small>tokens 165 · source: 편의시설</small></div>`;
-  const reviewChunks = `
-            <div class="chunk active"><strong>Chunk 043 · 신선도/회 품질</strong>회가 신선하고 숙성회 식감이 좋다는 리뷰를 묶어 메뉴 추천과 품질 신뢰 답변에 사용합니다.<small>tokens 238 · reviews #001, #027, #052</small></div>
-            <div class="chunk"><strong>Chunk 057 · 물회/점심 식사</strong>속초식 항아리 물회, 생선구이 쌈밥, 회덮밥 등 점심 식사 가능성을 묻는 질문에 연결합니다.<small>tokens 252 · reviews #014, #039, #078</small></div>
-            <div class="chunk"><strong>Chunk 063 · 모임/예약</strong>예약 후 자리 안내, 단체 모임, 직원 메뉴 설명 리뷰를 묶어 회식/가족모임 추천에 사용합니다.<small>tokens 241 · reviews #027, #091</small></div>
-            <div class="chunk"><strong>Chunk 071 · 접근성/주차</strong>어린이대공원역, 주변 공영주차장, 대중교통 접근성 리뷰를 매장 방문 안내 답변에 사용합니다.<small>tokens 208 · reviews #066</small></div>
-            <div class="chunk"><strong>Chunk 088 · 고객 응대</strong>직원 응대와 사장님 답글이 포함된 리뷰를 친절도/서비스 톤 질문의 보조 근거로 연결합니다.<small>tokens 229 · reviews #001, #091</small></div>
-            <div class="chunk"><strong>Chunk 104 · 종합 추천</strong>해산물 모듬 구성, 메뉴 폭, 재방문 의사를 종합해 “처음 가면 뭐 먹을까?” 답변 후보로 사용합니다.<small>tokens 264 · reviews #100</small></div>`;
   return shellPage(
-    isInfo ? 'info 파일 벡터 임베딩 설정' : 'review 파일 벡터 임베딩 설정',
-    `<div class="rb-shell">
-  <aside class="rb-side">
-    <div class="rb-brand">RB Dialog</div>
-    <div class="rb-bot"><div class="rb-bot-name">해화로in수산 챗봇</div><div class="rb-bot-meta">Knowledge detail</div></div>
-    <nav class="rb-nav">
-      <a href="#">대시보드</a><a href="#" class="active">지식 관리</a><a href="#">대화 이력</a><a href="#">배포 설정</a>
-    </nav>
-  </aside>
-  <main class="rb-main">
-    <div class="rb-top">
-      <div><div class="rb-kicker">Vector Embedding</div><h1>${isInfo ? '업체 정보 문서 설정' : '방문자 리뷰 문서 설정'}</h1><p class="rb-desc">${isInfo ? '매장 기본정보 문서를 챗봇 답변의 기준 지식으로 사용합니다.' : '리뷰 문서를 고객 질문의 분위기와 추천 답변 근거로 사용합니다.'}</p></div>
-      <button class="rb-btn secondary">목록으로</button>
-    </div>
-    <div class="detail-layout">
-      <section class="doc-card">
-        <div class="doc-title">${isInfo ? 'info_해화로in수산.docx' : 'reviews_해화로in수산.docx'}</div>
-        <div class="doc-meta"><span class="badge green">임베딩 완료</span><span class="badge blue">${isInfo ? '업체 정보' : '리뷰 모음'}</span><span class="badge gray">text-embedding-3-small</span></div>
-        <div class="form-row"><div class="form-label">문서 설명</div><div class="form-value">${isInfo ? '상호명, 업종, 위치, 영업시간, 메뉴, 예약, 주차, 편의시설 정보를 포함합니다.' : '방문자 리뷰 100개, 리뷰 작성일, 사장님 답글, 주요 만족/불편 키워드를 포함합니다.'}</div></div>
-        <div class="form-row"><div class="form-label">검색 범위</div><div class="form-value">해화로in수산 챗봇 전용 지식베이스</div></div>
-        <div class="form-row"><div class="form-label">청크 설정</div><div class="form-value">chunk size 800 · overlap 120 · Korean sentence boundary</div></div>
-        <div class="form-row"><div class="form-label">답변 우선순위</div><div class="form-value">${isInfo ? '영업시간, 위치, 예약, 메뉴 질문에 최우선 사용' : '메뉴 추천, 방문 경험, 분위기 질문에 보조 근거로 사용'}</div></div>
-${isInfo ? infoPreview : reviewPreview}
-      </section>
-      <aside class="doc-card doc-inspector">
-        <div class="vector-box">
-          <div class="vector-title">청크 검사</div>
-          <div class="progress"><span></span></div>
-          <div class="scroll-hint">문서 원문과 연결되는 검색 단위입니다. 실제 데이터 전체 대신 데모 확인에 필요한 대표 청크만 표시합니다.</div>
-          <div class="chunk-list">
-${isInfo ? infoChunks : reviewChunks}
-          </div>
-        </div>
-        <button type="button" class="rb-btn demo-rb-action">${isInfo ? 'review 파일 보기' : '챗봇 구현 확인하기'}</button>
-      </aside>
-    </div>
+    'review 파일 벡터 임베딩 설정',
+    `<div class="knowledge-page">
+  <header class="knowledge-topbar">
+    <div class="rb-logo">rb<span>DIALOG</span></div>
+    <div class="tenant">soho-test <span>›</span> <b>해화로in수산</b> <span class="caret">▼</span></div>
+    <div class="top-actions"><span>공지사항</span><span class="avatar"></span><span>류*근님</span></div>
+  </header>
+  <nav class="knowledge-nav">
+    <a>시나리오</a><a>인텐트</a><a>엔티티</a><a>봇 응답</a><a>API 관리</a><a>AI 에이전트 <em>PRO</em></a><a class="active">Knowledge 관리 <em>PRO</em></a><a>지식 Lab</a><a>봇 설정</a>
+    <span class="nav-spacer"></span><a>훈련</a><a>서비스 배포</a><a>검증</a><a>통계</a><a>테스트</a>
+  </nav>
+  <main class="knowledge-main">
+    <section class="knowledge-title-row">
+      <input class="knowledge-title-input" value="reviews_haehwaro" readonly />
+      <button class="save-button" type="button">저장</button>
+    </section>
+    <div class="modified">최종수정 2026.05.20 11:36&nbsp;&nbsp; | &nbsp;&nbsp;이*원</div>
+
+    <section class="knowledge-card file-card">
+      <div class="file-info">
+        <strong>reviews_haehwaro.docx</strong>
+        <p>가능 확장자: pdf, doc, docx, ppt, pptx &nbsp;&nbsp; 문서 크기 최대 10MB 미만</p>
+      </div>
+      <button class="blue-button" type="button">문서 업로드</button>
+      <div class="embed-status">
+        <div class="embed-label">임베딩 변환</div>
+        <div class="complete">완료</div>
+        <small>(skp/text-embeddings-20240402)</small>
+      </div>
+      <button class="blue-button retry" type="button">변환 재시도</button>
+    </section>
+
+    <section class="knowledge-card reference-row">
+      <label>참고 정보명 <span>*</span> <i>?</i></label>
+      <input value="방문자 리뷰" readonly />
+    </section>
+
+    <section class="knowledge-card chunk-settings">
+      <label>청크 크기 <span>*</span> <i>?</i></label>
+      <input value="800" readonly />
+      <label>청크 오버랩 <span>*</span> <i>?</i></label>
+      <input value="200" readonly />
+      <button type="button">적용</button>
+      <div class="chunk-total">청크&nbsp;&nbsp;총 404</div>
+    </section>
+
+    <section class="chunk-area review-chunk-area">
+      ${chunks
+        .map((chunk, index) => {
+          const highlighted = chunk.replace(
+            /(모듬 회ㆍ산물|속초식 항아리 물회|초신선 大활어 3종 스페셜|화덕 고등어구이 쌈밥|프리미엄 고등어 화덕구이 정찬|네이버 예약|광진광장공영주차장|처음 방문 추천|가족 식사 추천|신선도|친절한 응대|예약\/주차 안내)/g,
+            '<mark>$1</mark>'
+          );
+          return `<article class="chunk-row review-row" data-chunk="${index + 1}">${highlighted}</article>`;
+        })
+        .join('\n      ')}
+      <div class="load-more-wrap"><button type="button" class="load-more-button">더보기</button></div>
+    </section>
   </main>
 </div>`,
-    rbStyles()
+    `<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f3f5f8;color:#2d3340;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;font-size:14px}
+  .knowledge-topbar{height:52px;background:#302e43;color:#fff;display:flex;align-items:center;padding:0 24px;gap:28px}
+  .rb-logo{font-size:19px;font-weight:900;letter-spacing:-.03em}.rb-logo span{font-size:14px;margin-left:1px}
+  .tenant{font-size:13px;color:#d8dbe7}.tenant span{color:#9da3b6;margin:0 8px}.tenant b{color:#fff}.caret{font-size:10px}
+  .top-actions{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:12px;color:#e5e7ef}.avatar{width:18px;height:18px;border-radius:50%;background:#8f95a3;display:inline-block}
+  .knowledge-nav{height:45px;background:#fff;border-bottom:1px solid #e4e8f1;display:flex;align-items:center;padding:0 24px;gap:0;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  .knowledge-nav a{height:45px;display:flex;align-items:center;padding:0 14px;color:#262b36;text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap;border-bottom:3px solid transparent}
+  .knowledge-nav a.active{color:#3468f6;border-bottom-color:#3468f6}.knowledge-nav em{font-style:normal;font-size:9px;color:#fff;background:#ff6262;border-radius:999px;padding:1px 4px;margin-left:4px}
+  .nav-spacer{flex:1}
+  .knowledge-main{max-width:1392px;margin:0 auto;padding:48px 56px 56px}
+  .knowledge-title-row{display:grid;grid-template-columns:1fr 96px;gap:24px;align-items:center}
+  .knowledge-title-input{height:50px;border:1px solid #e5e9f1;background:#fff;padding:0 18px;font-size:20px;color:#343a46;outline:0}
+  .save-button{height:50px;border:0;background:#a8bfff;color:#fff;font-size:16px;font-weight:800}
+  .modified{text-align:right;color:#8b93a3;font-size:13px;margin:16px 0 20px}
+  .knowledge-card{background:#fff;border:1px solid #e7ebf2}
+  .file-card{height:112px;display:grid;grid-template-columns:1fr 112px 1fr 112px;align-items:center}
+  .file-info{padding:0 24px}.file-info strong{font-size:15px;color:#4b5563;text-decoration:underline}.file-info p{margin:10px 0 0;color:#8b93a3;font-size:12px}
+  .blue-button{height:40px;border:0;background:#3868f2;color:#fff;font-size:14px;font-weight:800}.retry{margin-right:30px}
+  .embed-status{height:112px;border-left:1px solid #e7ebf2;display:grid;grid-template-columns:92px 1fr;align-content:center;padding-left:32px;column-gap:8px}
+  .embed-label{font-weight:800;color:#3f4652}.complete{color:#10b345;font-weight:900}.embed-status small{grid-column:2;color:#8b93a3;font-size:11px}
+  .reference-row{height:68px;display:grid;grid-template-columns:112px 1fr;align-items:center;padding:0 22px}.reference-row label,.chunk-settings label{font-size:13px;font-weight:800;color:#3e4652}.reference-row span,.chunk-settings span{color:#3468f6}.reference-row i,.chunk-settings i{font-style:normal;color:#a4abb8;border:1px solid #c9ced8;border-radius:50%;font-size:10px;padding:0 4px;margin-left:4px}
+  .reference-row input{height:36px;border:1px solid #d6dbe5;padding:0 14px;color:#222;background:#fff;font-size:14px}
+  .chunk-settings{height:70px;margin-top:16px;display:flex;align-items:center;gap:18px;padding:0 22px}.chunk-settings input{width:148px;height:36px;border:1px solid #d6dbe5;padding:0 14px;font-size:14px;background:#fff}.chunk-settings button{width:66px;height:36px;background:#fff;border:1px solid #3468f6;color:#3468f6;font-weight:800}.chunk-total{color:#7d8491;font-size:13px;font-weight:700;margin-left:6px}
+  .chunk-area{background:#fff;border:1px solid #e7ebf2;border-top:0;padding:24px 32px 34px}
+  .chunk-row{position:relative;margin-bottom:18px;border:1px solid #edf0f5;background:#fff;min-height:104px;padding:19px 24px 18px 30px;line-height:1.86;font-size:12px;color:#262c37;word-break:keep-all}
+  .chunk-row::before{content:'';position:absolute;left:-1px;top:0;bottom:0;width:4px;background:#3468f6}
+  .chunk-row mark{background:#d9ecff;color:#1d2733;padding:1px 2px}
+  .load-more-wrap{display:flex;justify-content:center;padding:8px 0 2px}.load-more-button{height:38px;min-width:110px;border:1px solid #3468f6;background:#fff;color:#3468f6;font-weight:800;border-radius:4px;cursor:default}
+  @media(max-width:900px){.knowledge-main{padding:28px 18px}.knowledge-nav{overflow:auto}.file-card{height:auto;grid-template-columns:1fr;gap:14px;padding:18px}.embed-status{height:auto;border-left:0;padding:0;grid-template-columns:92px 1fr}.reference-row{grid-template-columns:1fr}.chunk-settings{height:auto;flex-wrap:wrap;padding:18px}.chunk-row{font-size:12px;line-height:1.8}}
+</style>`
   );
+}
+
+function rbDetailPage(kind: 'info' | 'reviews'): string {
+  if (kind === 'info') return rbKnowledgeInfoPage();
+  return rbKnowledgeReviewPage();
 }
 
 function chatPage(): string {
