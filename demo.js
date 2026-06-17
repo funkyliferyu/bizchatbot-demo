@@ -70,7 +70,7 @@
       page: 'chatbot_live.html',
       label: '실 챗봇 확인',
       target: null,
-      guide: '실제 RB Dialog 챗봇입니다. 새 창 버튼 또는 화면 안의 챗봇에서 직접 질문해볼 수 있습니다.',
+      guide: '실제 RB Dialog 챗봇입니다. 화면 안의 챗봇에서 직접 질문해볼 수 있습니다.',
       next: null
     }
   ];
