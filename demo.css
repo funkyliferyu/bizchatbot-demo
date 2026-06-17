@@ -111,7 +111,7 @@
 .demo-tooltip {
   position: absolute;
   z-index: 10000;
-  max-width: 280px;
+  max-width: 300px;
   padding: 10px 14px;
   background: #b45309;
   color: #fff;
@@ -120,7 +120,19 @@
   line-height: 1.45;
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(180, 83, 9, 0.4);
-  pointer-events: none;
+  pointer-events: auto;
+}
+
+.demo-tooltip.top-right {
+  position: fixed;
+  top: 62px;
+  right: 16px;
+  left: auto !important;
+  max-width: 340px;
+}
+
+.demo-tooltip.top-right::after {
+  display: none;
 }
 
 .demo-tooltip::after {
@@ -147,4 +159,26 @@
   color: #fde68a;
   margin-bottom: 3px;
   letter-spacing: 0.04em;
+}
+
+.demo-tooltip-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.demo-tooltip-cta {
+  appearance: none;
+  border: 0;
+  border-radius: 6px;
+  background: #fff;
+  color: #92400e;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+.demo-tooltip-cta:hover {
+  background: #fff7ed;
 }

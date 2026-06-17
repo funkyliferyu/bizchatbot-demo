@@ -51,8 +51,10 @@
     {
       page: 'RB-Dialog-soho2.html',
       label: 'info 임베딩 설정',
-      target: { selector: '.demo-rb-action', text: 'review 파일 보기' },
-      guide: '업체 정보 문서가 RAG 검색용 벡터로 임베딩되었습니다. [review 파일 보기]로 리뷰 문서 설정을 확인합니다.',
+      target: null,
+      guide: '업체 정보 문서가 RAG 검색용 벡터로 임베딩되었습니다. 문서 내용과 청크 구성을 확인한 뒤 리뷰 문서 설정으로 이동합니다.',
+      guideCta: '리뷰파일 보러가기',
+      guidePosition: 'top-right',
       next: 'RB-Dialog-soho3.html'
     },
     {
@@ -320,6 +322,13 @@
 
   function positionTooltip() {
     if (!tooltip) return;
+    if (step.guidePosition === 'top-right') {
+      tooltip.classList.add('top-right');
+      tooltip.classList.remove('below');
+      tooltip.style.top = '';
+      tooltip.style.left = '';
+      return;
+    }
     var el = anchorEl();
     var rect = el.getBoundingClientRect();
     var top = rect.top + window.scrollY - tooltip.offsetHeight - 14;
@@ -340,8 +349,19 @@
     if (tooltip) return;
     tooltip = document.createElement('div');
     tooltip.className = 'demo-tooltip';
-    tooltip.innerHTML = '<span class="demo-tooltip-step">STEP ' + (stepIndex + 1) + '/' + SCENARIO.length + '</span>' + step.guide;
+    tooltip.innerHTML =
+      '<span class="demo-tooltip-step">STEP ' + (stepIndex + 1) + '/' + SCENARIO.length + '</span>' +
+      '<div class="demo-tooltip-body">' + step.guide + '</div>' +
+      (step.guideCta ? '<div class="demo-tooltip-actions"><button type="button" class="demo-tooltip-cta">' + step.guideCta + '</button></div>' : '');
     document.body.appendChild(tooltip);
+    var cta = tooltip.querySelector('.demo-tooltip-cta');
+    if (cta) {
+      cta.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        goNext();
+      });
+    }
     positionTooltip();
     window.addEventListener('resize', positionTooltip);
     window.addEventListener('scroll', positionTooltip, true);

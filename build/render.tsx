@@ -193,7 +193,119 @@ function rbListPage(): string {
   );
 }
 
+function rbKnowledgeInfoPage(): string {
+  const chunks = [
+    '해화로in수산 식당 정보 기본 정보 상호명: 해화로in수산 업종: 생선회 / 해산물 전화번호: 0507-1359-5863 주소(도로명): 서울 광진구 광나루로 383 1,2층 주소(지번): 서울 광진구 군자동 361-24 우편번호: 05005 인스타그램: https://www.instagram.com/forebus_jubong 오시는 길 및 주차 주차: 매장 전용 주차 불가 ◆ 대중교통ㆍ지하철/도보: 어린이대공원역 5번출구 → 광진광장공영주차장 입구 방향 도보 1분',
+    '◆ 대중교통ㆍ지하철/도보: 어린이대공원역 5번출구 → 광진광장공영주차장 입구 방향 도보 1분 · 버스: 어린이대공원역ㆍ화양천주교회 정류장 하차 ◆ 자차 이용 시 인근 주차장: 광진광장공영주차장(도보 1분) · 어린이대공원 정문 주차장(도보 5분) · AJ파크 어린이회관점 유료주차장 · KCC파크타운 유료주차장(주말에 비교적 수월하게 이용 가능) 영업시간 월ㆍ화ㆍ수ㆍ목: 11:20 ~ 23:30 / 브레이크타임 14:30~16:30 / 라스트오더 22:40 금ㆍ토: 11:20 ~ 24:00 / 라스트오더 23:10 일: 11:20 ~ 23:30',
+    '※ 공휴일ㆍ대체공휴일에도 정상 영업(11:20~23:30) ※ 별도 휴무일 없음(연중무휴) 편의시설 및 서비스 테이크아웃 할인(회 메뉴 포장 시 40% 할인 이벤트 진행 중) 콜키지 가능(유료, 프리미엄 위스키/와인 10,000원) 단체 이용 가능(최대 120명) 네이버 예약 가능 무선인터넷(Wifi) 남/녀 화장실 구분 유아의자 대기공간 포장 배달 출입구 및 좌석 휠체어 이용 가능 반려동물 동반 가능(케이지 필수) 고유가 피해지원금 사용 가능(신용ㆍ체크카드) ※ 실제 사용 가능 여부는 매장에 확인 필요',
+    "저희는 바다와 사람이 만나 이루는 조화로운 맛을 정성껏 담아, 따뜻한 한 끼를 선물하고자 이 공간을 열었습니다. 신선한 재료만을 엄선해 자연 그대로의 깊은 맛을 전하며, 과한 기교보다 재료 본연의 풍미에 집중합니다. '재료를 아끼지 말고, 장사는 사람을 남기는 것'이라는 마음으로 좋은 재료를 아낌없이 사용하고, 누구나 부담 없이 즐기실 수 있는 정직한 한 끼를 준비했습니다.",
+    '싱싱한 회부터 정갈한 식사, 계절을 담은 해산물 요리까지, 한 끼가 하루를 따뜻하게 채우는 시간이 되길 바랍니다. 고객님께 드리는 모든 음식에는 저희의 진심이 담겨 있습니다. 앞으로도 변함없는 맛과 정성으로 늘 같은 자리에서 기다리겠습니다. 감사합니다. 메뉴판 해화로in수산 메뉴 구성: ① 대표: 인기 메뉴 ② 메인 요리 ③ 식사 메뉴 ④ 활어 & 숙성회 ⑤ 곁들임ㆍ추가 메뉴 10,000~20,000원 ① 대표ㆍ인기 메뉴 모듬 회ㆍ산물 - 59,000원(회도, 해산물도 좋아하는 분들의 선택) 무늬 오징어 회 - 59,000원(쫄깃한 식감, 소금김밥 조합 추천) 초신선 大활어 3종 스페셜 - 49,000원',
+    '화덕 모듬 생선구이 쌈밥 - 20,000원(6가지 랜덤) 직화 쭈꾸미 쌈밥 - 13,000원 화덕 고등어구이 쌈밥 - 14,000원(1인 1마리) 직화 오징어 불고기 우렁 쌈밥 정식 - 13,000원 모듬 해산물 - 49,000원 도다리 세로회(연중) - 55,000원 특 시마아지 숙성회(2~10월) - 가격 변동 ② 메인 요리 한우대창 알곤이찜 - 32,000원 통우럭 시레기 조림 - 39,000원 얼큰 알고니 칼국수탕 - 29,000원 속초식 깻잎 막회 - 45,000원 속초식 항아리 물회 - 39,000원 알고니 가득 매운탕(칼국수) - 29,000원 통오징어 화덕 버터구이 - 18,000원',
+    '화덕 고등어 우렁 쌈밥 정식 - 14,000원 1인 선별 고등어 화덕구이 - 주간 인기 2위 프리미엄 고등어 화덕구이 정찬 - 13,000원 직화 쭈꾸미 우렁 쌈밥 정식(2인 이상) - 주간 인기 3위 / 13,000원 1인 물회 + 밥 - 주간 인기 4위 / 15,000원 오ㆍ삼 불고기 우렁 쌈밥 정식 - 13,000원 직화 오징어 볶음 우렁 쌈밥 - 13,000원 정통 직화 제육 우렁 쌈밥 - 12,000원 회 비빔국수 - 14,000원 방앗간 들기름 명품 회덮밥 - 12,000원 뚝배기 갈치속젓 알밥 - 10,000원',
+    '활민어 大숙성회(4~10월) - 69,000원 명품 大광어 숙성회(연중) - 49,000원 명품 쫀득 大도미 숙성회(연중) - 69,000원 프리미엄 잿방어 숙성회(4~10월) - 69,000원 8kg이상 특돼지방어 숙성회(11~2월) - 69,000원 명품 大삼치 숙성회(연중) - 49,000원 숙성 고등어회(연중) - 가격 변동 프리미엄 숙성 연어회(연중) - 39,000원 1인 물회 - 15,000원 산낙지 - 25,000원 우니 단새우 - 가격 변동 제철 해산물 모듬(대하ㆍ전어ㆍ석화ㆍ굴찜ㆍ산오징어) - 가격 변동',
+    '수제 새우 튀김 - 10,000원 레트로 설탕 토스트 - 10,000원 들기름 계란 후라이 - 10,000원 매운 불파게티 - 7,000원 정통 대접 맨초밥 - 4,000원 프리미엄 위스키/와인 콜키지 - 10,000원 제철 메뉴(시즌별) 11월~2월: 대방어, 숭어 3월~6월: 시마아지, 갯방어, 숭어, 도다리, 벤자리, 병어돔 6월~10월: 산오징어, 부시리, 농어, 자연산민어, 벤자리, 자리돔, 덕자, 대삼치, 연어, 무늬오징어, 빨고둥어, 호래기, 능성어, 자바리 예약 안내 ◆ 네이버 예약 가능(바로 확정 예약)',
+    '네이버 예약 가능 시간: 11:30 ~ 21:30 ◆ 예약 특전 4인 이상 예약(회 또는 요리 메뉴 이용 시) → 후식 화덕밥 or 후배기 고막알밥 무료 제공 ◆ 룸 이용 인원 / 12인룸 운영(사전 문의 필수) ◆ 예약금 안내(30,000원) 방문 시 결제 금액에서 차감 또는 취소 후 환불 · 당일 취소/노쇼: 예약금 반환 불가 · 결제 시 예약금 반환 방법은 당일 매장에 문의 링크: https://m.booking.naver.com/booking/6/bizes/1352276',
+    '포장 할인 이벤트(진행 중) 회 메뉴 매장 방문 포장 시 40% 할인 기간: 2026.03.19 ~ 2026.10.31(사장님 재량으로 종료 가능) ◆ 무료 서비스 비 오는 날 또는 평일 오후 6시 이전 입장 시 → 뚝배기 조개 지리탕 서비스(2025.09.27~) 매장 운영 데이터 ◆ 평균 결제 금액 1회 평균 5만원대 · 점심 35,000~40,000원 · 저녁 65,000~70,000원 · 밤 85,000~90,000원 ◆ 혼잡 시간대 평일(월~금): 오후 6시 가장 혼잡 토요일: 오후 6시(주중 가장 한가함) 일요일: 오후 6시 평균 체류 시간: 약 60분',
+    '◆ 혼잡 시간대 평일(월~금): 오후 6시 가장 혼잡 토요일: 오후 6시(주중 가장 한가함) 일요일: 오후 6시 평균 체류 시간: 약 60분 ◆ 주간 인기 메뉴 순위 1위: 선별 고등어 화덕구이 우렁 쌈밥 정식(2인 이상) 2위: 1인 선별 고등어 화덕구이 3위: 직화 쭈꾸미 우렁 쌈밥 정식(2인 이상) 4위: 1인 물회 + 밥 5위: 얼큰 대 서더리탕(식사메뉴 주문 시 별도 불가) 소식 및 이벤트: 매장 제철 및 신메뉴 정보, 포장 할인, TV 출연 정보와 영업 안내를 포함합니다.'
+  ];
+
+  return shellPage(
+    'info 파일 벡터 임베딩 설정',
+    `<div class="knowledge-page">
+  <header class="knowledge-topbar">
+    <div class="rb-logo">rb<span>DIALOG</span></div>
+    <div class="tenant">soho-test <span>›</span> <b>해화로in수산</b> <span class="caret">▼</span></div>
+    <div class="top-actions"><span>공지사항</span><span class="avatar"></span><span>류*근님</span></div>
+  </header>
+  <nav class="knowledge-nav">
+    <a>시나리오</a><a>인텐트</a><a>엔티티</a><a>봇 응답</a><a>API 관리</a><a>AI 에이전트 <em>PRO</em></a><a class="active">Knowledge 관리 <em>PRO</em></a><a>지식 Lab</a><a>봇 설정</a>
+    <span class="nav-spacer"></span><a>훈련</a><a>서비스 배포</a><a>검증</a><a>통계</a><a>테스트</a>
+  </nav>
+  <main class="knowledge-main">
+    <section class="knowledge-title-row">
+      <input class="knowledge-title-input" value="info_haehwaro" readonly />
+      <button class="save-button" type="button">저장</button>
+    </section>
+    <div class="modified">최종수정 2026.05.20 14:44&nbsp;&nbsp; | &nbsp;&nbsp;이*원</div>
+
+    <section class="knowledge-card file-card">
+      <div class="file-info">
+        <strong>info_haehwaro.docx</strong>
+        <p>가능 확장자: pdf, doc, docx, ppt, pptx &nbsp;&nbsp; 문서 크기 최대 10MB 미만</p>
+      </div>
+      <button class="blue-button" type="button">문서 업로드</button>
+      <div class="embed-status">
+        <div class="embed-label">임베딩 변환</div>
+        <div class="complete">완료</div>
+        <small>(skp/text-embeddings-20240402)</small>
+      </div>
+      <button class="blue-button retry" type="button">변환 재시도</button>
+    </section>
+
+    <section class="knowledge-card reference-row">
+      <label>참고 정보명 <span>*</span> <i>?</i></label>
+      <input value="식당정보" readonly />
+    </section>
+
+    <section class="knowledge-card chunk-settings">
+      <label>청크 크기 <span>*</span> <i>?</i></label>
+      <input value="500" readonly />
+      <label>청크 오버랩 <span>*</span> <i>?</i></label>
+      <input value="100" readonly />
+      <button type="button">적용</button>
+      <div class="chunk-total">청크&nbsp;&nbsp;총 12</div>
+    </section>
+
+    <section class="chunk-area">
+      ${chunks
+        .map((chunk, index) => {
+          const highlighted = chunk.replace(
+            /(대중교통ㆍ지하철\/도보: 어린이대공원역 5번출구 → 광진광장공영주차장 입구 방향 도보 1분|화덕 모듬 생선구이 쌈밥 - 20,000원|직화 쭈꾸미 쌈밥 - 13,000원|화덕 고등어구이 쌈밥 - 14,000원|프리미엄 잿방어 숙성회\\(4~10월\\) - 69,000원|수제 새우 튀김 - 10,000원|레트로 설탕 토스트 - 10,000원|들기름 계란 후라이 - 10,000원|매운 불파게티 - 7,000원|토요일: 오후 6시\\(주중 가장 한가함\\)|평일 오후 6시 이전 입장 시)/g,
+            '<mark>$1</mark>'
+          );
+          return `<article class="chunk-row" data-chunk="${index + 1}">${highlighted}</article>`;
+        })
+        .join('\n      ')}
+    </section>
+  </main>
+</div>`,
+    `<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f3f5f8;color:#2d3340;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;font-size:14px}
+  .knowledge-topbar{height:52px;background:#302e43;color:#fff;display:flex;align-items:center;padding:0 24px;gap:28px}
+  .rb-logo{font-size:19px;font-weight:900;letter-spacing:-.03em}.rb-logo span{font-size:14px;margin-left:1px}
+  .tenant{font-size:13px;color:#d8dbe7}.tenant span{color:#9da3b6;margin:0 8px}.tenant b{color:#fff}.caret{font-size:10px}
+  .top-actions{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:12px;color:#e5e7ef}.avatar{width:18px;height:18px;border-radius:50%;background:#8f95a3;display:inline-block}
+  .knowledge-nav{height:45px;background:#fff;border-bottom:1px solid #e4e8f1;display:flex;align-items:center;padding:0 24px;gap:0;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  .knowledge-nav a{height:45px;display:flex;align-items:center;padding:0 14px;color:#262b36;text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap;border-bottom:3px solid transparent}
+  .knowledge-nav a.active{color:#3468f6;border-bottom-color:#3468f6}.knowledge-nav em{font-style:normal;font-size:9px;color:#fff;background:#ff6262;border-radius:999px;padding:1px 4px;margin-left:4px}
+  .nav-spacer{flex:1}
+  .knowledge-main{max-width:1392px;margin:0 auto;padding:48px 56px 56px}
+  .knowledge-title-row{display:grid;grid-template-columns:1fr 96px;gap:24px;align-items:center}
+  .knowledge-title-input{height:50px;border:1px solid #e5e9f1;background:#fff;padding:0 18px;font-size:20px;color:#343a46;outline:0}
+  .save-button{height:50px;border:0;background:#a8bfff;color:#fff;font-size:16px;font-weight:800}
+  .modified{text-align:right;color:#8b93a3;font-size:13px;margin:16px 0 20px}
+  .knowledge-card{background:#fff;border:1px solid #e7ebf2}
+  .file-card{height:112px;display:grid;grid-template-columns:1fr 112px 1fr 112px;align-items:center}
+  .file-info{padding:0 24px}.file-info strong{font-size:15px;color:#4b5563;text-decoration:underline}.file-info p{margin:10px 0 0;color:#8b93a3;font-size:12px}
+  .blue-button{height:40px;border:0;background:#3868f2;color:#fff;font-size:14px;font-weight:800}.retry{margin-right:30px}
+  .embed-status{height:112px;border-left:1px solid #e7ebf2;display:grid;grid-template-columns:92px 1fr;align-content:center;padding-left:32px;column-gap:8px}
+  .embed-label{font-weight:800;color:#3f4652}.complete{color:#10b345;font-weight:900}.embed-status small{grid-column:2;color:#8b93a3;font-size:11px}
+  .reference-row{height:68px;display:grid;grid-template-columns:112px 1fr;align-items:center;padding:0 22px}.reference-row label,.chunk-settings label{font-size:13px;font-weight:800;color:#3e4652}.reference-row span,.chunk-settings span{color:#3468f6}.reference-row i,.chunk-settings i{font-style:normal;color:#a4abb8;border:1px solid #c9ced8;border-radius:50%;font-size:10px;padding:0 4px;margin-left:4px}
+  .reference-row input{height:36px;border:1px solid #d6dbe5;padding:0 14px;color:#222;background:#fff;font-size:14px}
+  .chunk-settings{height:70px;margin-top:16px;display:flex;align-items:center;gap:18px;padding:0 22px}.chunk-settings input{width:148px;height:36px;border:1px solid #d6dbe5;padding:0 14px;font-size:14px;background:#fff}.chunk-settings button{width:66px;height:36px;background:#fff;border:1px solid #3468f6;color:#3468f6;font-weight:800}.chunk-total{color:#7d8491;font-size:13px;font-weight:700;margin-left:6px}
+  .chunk-area{background:#fff;border:1px solid #e7ebf2;border-top:0;padding:24px 32px 34px}
+  .chunk-row{position:relative;margin-bottom:24px;border:1px solid #edf0f5;background:#fff;min-height:96px;padding:26px 26px 24px 30px;line-height:2.05;font-size:13px;color:#262c37;word-break:keep-all}
+  .chunk-row::before{content:'';position:absolute;left:-1px;top:0;bottom:0;width:4px;background:#3468f6}
+  .chunk-row mark{background:#d9ecff;color:#1d2733;padding:1px 2px}
+  @media(max-width:900px){.knowledge-main{padding:28px 18px}.knowledge-nav{overflow:auto}.file-card{height:auto;grid-template-columns:1fr;gap:14px;padding:18px}.embed-status{height:auto;border-left:0;padding:0;grid-template-columns:92px 1fr}.reference-row{grid-template-columns:1fr}.chunk-settings{height:auto;flex-wrap:wrap;padding:18px}.chunk-row{font-size:12px;line-height:1.8}}
+</style>`
+  );
+}
+
 function rbDetailPage(kind: 'info' | 'reviews'): string {
+  if (kind === 'info') return rbKnowledgeInfoPage();
+
   const isInfo = kind === 'info';
   const infoPreview = `
         <div class="section-label">Document Preview</div>
