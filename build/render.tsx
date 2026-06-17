@@ -332,10 +332,10 @@ function chatPage(): string {
 function indexPage(): string {
   const screens = [
     ['1', '매장 등록 URL 입력', 'soho_store_register.html'],
-    ['2', '해화로in수산 정보 불러옴', 'soho_store_register_loaded.html'],
-    ['3', 'RAG 문서 생성 완료', 'soho_store_register_rag_generated.html'],
-    ['4', '다운로드 완료 팝업', 'soho_store_register_download_modal.html'],
-    ['5', '챗봇 지식 관리 목록', 'RB-Dialog-soho1.html'],
+    ['2', '네이버 플레이스 정보 가져오기', 'soho_store_register_loaded.html'],
+    ['3', 'RAG 문서 생성', 'soho_store_register_rag_generated.html'],
+    ['4', '다운로드 완료', 'soho_store_register_download_modal.html'],
+    ['5', '챗봇 지식 관리 목록 조회', 'RB-Dialog-soho1.html'],
     ['6', 'info 문서 임베딩 설정', 'RB-Dialog-soho2.html'],
     ['7', 'review 문서 임베딩 설정', 'RB-Dialog-soho3.html'],
     ['8', '실 챗봇 확인', 'chatbot_live.html']
@@ -364,7 +364,7 @@ h1{font-size:24px;font-weight:900;margin-bottom:10px}.desc{font-size:13px;color:
   <div class="head">
     <div class="eyebrow">BIZPLANET · CHATBOT MANAGEMENT DEMO</div>
     <h1>챗봇관리 화면 데모</h1>
-    <p class="desc">네이버 플레이스 데이터로 RAG 문서를 생성하고, RB Dialog 지식 관리에 등록한 뒤 실제 챗봇 동작을 확인하는 8단계 흐름입니다.<br />각 화면 우상단 <strong>데모 바</strong>의 하이라이트를 따라 클릭하면 다음 화면으로 진행됩니다.</p>
+    <p class="desc">네이버 플레이스 데이터로 RAG 문서를 생성하고, RB Dialog 지식 관리에 등록한 뒤 실제 챗봇 동작을 확인하는 8단계 시나리오입니다.<br />각 화면 우상단 <strong>데모 바</strong>의 하이라이트를 따라 클릭하면 다음 화면으로 진행됩니다.</p>
     <a class="start" href="soho_store_register.html">시나리오 시작</a>
   </div>
   <div class="grid">
@@ -375,7 +375,6 @@ h1{font-size:24px;font-weight:900;margin-bottom:10px}.desc{font-size:13px;color:
       )
       .join('\n    ')}
   </div>
-  <p class="note">원본 소스는 수정하지 않고, 이 폴더의 정적 데모 파일만 생성합니다.</p>
 </div>
 </body>
 </html>`;
