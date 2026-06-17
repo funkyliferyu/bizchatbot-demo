@@ -3,9 +3,12 @@
   'use strict';
 
   var PLACE_URL = 'https://naver.me/5Q3VgeaD';
+  var DB_PLACE_URL = 'https://m.place.naver.com/place/1824807602/home';
   var CHATBOT_URL = 'https://chat.rbdialog.co.kr/?botId=8558886c0e8c4b0b849efafe82cc574d';
   var INFO_FILE = 'info_해화로in수산.docx';
   var REVIEWS_FILE = 'reviews_해화로in수산.docx';
+  var DB_DESCRIPTION = "안녕하세요. '해화로'를 찾아주셔서 진심으로 감사드립니다. 저희는 바다와 사람이 만나 이루는 조화로운 맛을 정성껏 담아, 따뜻한 한 끼를 선물하고자 이 공간을 열었습니다. 신선한 재료만을 엄선해 자연 그대로의 깊은 맛을 전하며, 과한 기교보다 재료 본연의 풍미에 집중합니다. '재료를 아끼지 말고, 장사는 사람을 남기는 것' 이라는 마음으로 좋은 재료를 아낌없이 사용하고, 누구나 부담 없이 즐기실 수 있는 정직한 한 끼를 준비했습니다. 싱싱한 회부터 정갈한 식사, 계절을 담은 해산물 요리까지, 한 끼가 하루를 따뜻하게 채우는 시간이 되길 바랍니다. 고객님께 드리는 모든 음식에는 저희의 진심이 담겨 있습니다. 앞으로도 변함없는 맛과 정성으로 늘 같은 자리에서 기다리겠습니다. 감사합니다.\n\n(AI요약정보) 신선한 대방어의 겨울철 진미";
+  var DB_PARKING_NOTE = '도보이용시 : 어린이대공원역 5번출구 광진광장공영주차장 입구 에서 도보 1분 지하철 이용시 : 어린이대공원역 5번출구 광진광장공영주차장 입구 에서 도보 1분 버스 이용시 : 어린이대공원역. 화양천주교회 정류장 자차 이용시 : 광진광장공영주차장에 주차 혹은 어린이대공원 정문 주차장에 주차후 5분 도보 그 외 유료주차장(주말에 비교적 수월하게 이용가능 주차장) AJ파크 어린이회관점 유료주차장 KCC파크타운 유료주차장';
 
   var SCENARIO = [
     {
@@ -150,7 +153,7 @@
   }
 
   function populateHaehwaroBase() {
-    setValue('place-url', PLACE_URL);
+    setValue('place-url', DB_PLACE_URL);
     writeCategory('음식점 > 일식 > 생선회');
     setValue('f-name', '해화로in수산');
     setValue('f-biz', '');
@@ -162,8 +165,8 @@
     setValue('f-close', '24:00');
     setValue('f-break1', '14:30');
     setValue('f-break2', '16:30');
-    setValue('f-parking-note', '어린이대공원역 5번 출구 인근 공영/유료 주차장을 안내합니다.');
-    setValue('f-desc', "안녕하세요. '해화로'를 찾아주셔서 진심으로 감사드립니다. 신선한 재료만을 엄선해 자연 그대로의 깊은 맛을 전하며, 싱싱한 회부터 정갈한 식사와 계절 해산물 요리까지 정성껏 준비합니다.\n\n(AI요약정보) 신선한 대방어의 겨울철 진미");
+    setValue('f-parking-note', DB_PARKING_NOTE);
+    setValue('f-desc', DB_DESCRIPTION);
     setParking();
 
     var ragButton = field('rag-generate-button');
@@ -175,7 +178,7 @@
     setHidden('place-metadata-empty', true);
     setHtml('place-links-list', link('인스타그램', 'https://www.instagram.com/forebus_jubong') + '<br>' + link('식신', 'https://www.siksinhot.com/P/1760971') + '<br>' + link('다이닝코드', 'https://diningcode.com/profile.php?rid=k18mJkCL81Tr'));
     setHtml('place-booking', link('네이버 예약', 'https://m.booking.naver.com/booking/6/bizes/1352276'));
-    setHtml('place-facilities', chips(['단체 이용 가능', '예약', '무선 인터넷', '남/녀 화장실 구분', '유아의자', '대기공간', '포장', '배달']));
+    setHtml('place-facilities', chips(['단체 이용 가능', '예약', '무선 인터넷', '남/녀 화장실 구분', '유아의자', '대기공간', '포장', '배달', '테이크아웃 할인', '콜키지 가능 (유료)', '출입구 휠체어 이용가능', '좌석 휠체어 이용가능']));
     setHtml('place-review-stats', stat('방문자 리뷰', '1,861') + stat('블로그 리뷰', '432') + stat('텍스트 리뷰', '1,766') + stat('평점', '-'));
     setHtml('place-broadcasts', '<div class="broadcast-item"><div class="broadcast-title">KBS2 · 2TV생생정보</div><div class="broadcast-meta">26.01.09. · 해물조림</div></div>');
     setHtml('place-keywords', chips(['숙성회', '군자횟집', '어린이대공원횟집', '군자생선구이', '군자점심']));
@@ -184,11 +187,14 @@
     var count = field('place-menu-count');
     if (count) count.textContent = '55개';
     setHtml('place-menu-list',
-      '<div class="menu-item"><div class="menu-title">모듬 회ㆍ산물</div><div class="menu-meta">59,000원 · 회도, 해산물도 좋아하는 이들의 최고의 선택지</div></div>' +
+      '<div class="menu-item"><div class="menu-title">모듬 회ㆍ산물</div><div class="menu-meta">59,000원 · 회도,해산물도 좋아하는 이들의 최고의 선택지</div></div>' +
       '<div class="menu-item"><div class="menu-title">속초식 항아리 물회</div><div class="menu-meta">39,000원 · 속초식 정통 물회</div></div>' +
-      '<div class="menu-item"><div class="menu-title">초신선 大활어 3종 스페셜</div><div class="menu-meta">49,000원 · 엄선한 대어종 활어의 신선함</div></div>' +
-      '<div class="menu-item"><div class="menu-title">화덕 모듬 생선구이 쌈밥</div><div class="menu-meta">20,000원 · 6가지 랜덤 화덕구이 생선과 쌈밥</div></div>' +
-      '<div class="menu-item"><div class="menu-title">프리미엄 고등어 화덕구이 정찬</div><div class="menu-meta">13,000원 · 최상품 고등어와 수제 반찬 8가지</div></div>'
+      '<div class="menu-item"><div class="menu-title">무늬 오징어 회</div><div class="menu-meta">59,000원 · 쫄깃한 식감이 일품인 무늬 오징어 회에 소금김밥 조합은 극락 입니다</div></div>' +
+      '<div class="menu-item"><div class="menu-title">초신선 大활어 3종 스페셜</div><div class="menu-meta">49,000원 · 엄선한 대어종 활어의 신선함을 그대로 담았습니다.</div></div>' +
+      '<div class="menu-item"><div class="menu-title">7종 골라먹는 大숙성회</div><div class="menu-meta">59,000원 · 신선한 제철회와 숙성회 7종을 직접 골라 드세요. 최고의 맛을 선사합니다.</div></div>' +
+      '<div class="menu-item"><div class="menu-title">화덕 모듬 생선구이 쌈밥</div><div class="menu-meta">20,000원 · 6가지 랜덤 모듬 화덕구이 생선과 쌈밥의 조화</div></div>' +
+      '<div class="menu-item"><div class="menu-title">직화 쭈꾸미 쌈밥</div><div class="menu-meta">13,000원 · 모듬쌈, 우렁쌈장, 직화쭈꾸미, 미역국, 밥, 7찬</div></div>' +
+      '<div class="menu-item"><div class="menu-title">화덕 고등어구이 쌈밥</div><div class="menu-meta">14,000원 · 모듬쌈, 우렁쌈장, 화덕고등어 1인 1마리, 미역국, 밥, 7찬</div></div>'
     );
     setHtml('place-menu-images', '');
     setHidden('place-menu-images-panel', true);
