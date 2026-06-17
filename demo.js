@@ -61,7 +61,7 @@
       page: 'RB-Dialog-soho3.html',
       label: 'review 임베딩 설정',
       target: null,
-      guide: '방문자 리뷰 문서가 RAG 검색용 벡터로 임베딩되었습니다. 리뷰 청크를 확인한 뒤 실제 챗봇 화면으로 이동합니다.',
+      guide: '방문자 리뷰 문서가 RAG 검색용 벡터로 임베딩되었습니다. 리뷰 청크를 확인한 뒤 실제 두 문서를 지식 DB로 활용해 응답하는 챗봇 화면으로 이동합니다.',
       guideCta: '챗봇 구현 확인하기',
       guidePosition: 'top-right',
       next: 'chatbot_live.html'
