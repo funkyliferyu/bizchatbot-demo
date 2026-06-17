@@ -45,7 +45,7 @@
       page: 'RB-Dialog-soho1.html',
       label: '지식 관리 목록',
       target: { selector: '.knowledge-row', text: 'info_해화로in수산.docx' },
-      guide: 'RB Dialog 지식 관리 목록입니다. info 문서를 눌러 벡터 임베딩 설정을 확인합니다.',
+      guide: 'RB Dialog 지식 관리 메뉴에서 챗봇이 사용할 수 있도록 지식문서를 등록했습니다. info 문서를 눌러 벡터 임베딩 설정을 확인합니다.',
       next: 'RB-Dialog-soho2.html'
     },
     {
