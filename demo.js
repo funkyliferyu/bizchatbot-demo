@@ -23,7 +23,7 @@
       label: '매장 정보 불러옴',
       target: { selector: '#rag-generate-button' },
       scrollTarget: true,
-      guide: '해화로in수산의 실제 DB 정보가 입력되었습니다. [챗봇용 RAG 문서 생성]을 눌러 챗봇 지식 문서를 만듭니다.',
+      guide: '해화로in수산의 플레이스 정보를 기초로 DB 정보가 자동 입력되었습니다. [챗봇용 RAG 문서 생성]을 눌러 챗봇 지식 문서를 만듭니다.',
       next: 'soho_store_register_rag_generated.html'
     },
     {
